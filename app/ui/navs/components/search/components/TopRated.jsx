@@ -6,13 +6,18 @@ import Image from "next/image";
 import Link from "next/link";
 
 import React from "react";
+import { FiClock, FiMessageSquare } from "react-icons/fi";
 
 const TopRated = () => {
   return (
     <div className="space-y-2 hidden md:block">
       <div className="-space-y-3">
-        <p className="text-gray-400 font-medium text-xs tracking-tight">Hand-Picked</p>
-        <h4 className="text-gray-700 dark:text-gray-100 text-[22px]">Top-Read Stories</h4>
+        <p className="text-gray-400 font-medium text-xs tracking-tight">
+          Hand-Picked
+        </p>
+        <h4 className="text-gray-700 dark:text-gray-100 text-[22px]">
+          Top-Read Stories
+        </h4>
       </div>
       <div className="md:grid grid-cols-3 gap-16 justify-between items-center mt-4 space-x-4 hidden">
         {searchData.map((search, index) => {
@@ -30,29 +35,43 @@ const TopRated = () => {
                 >
                   {search.title}
                 </Link>
-                <div className="flex items-center justify-between">
-                  <p>
-                    {" "}
-                    <Link
-                      href={`/category/${generateLowerCase(search.category)}`}
-                      className="text-xs font-semibold text-gray-700 no-underline dark:text-gray-100 hover:text-gray-500 dark:hover:text-gray-400"
+                <div className="-space-y-4">
+                  <div className="flex items-center space-x-3 w-52">
+                    <p>
+                      {" "}
+                      <Link
+                        href={`/category/${generateLowerCase(search.category)}`}
+                        className="text-xs font-semibold text-gray-700 no-underline dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-400"
+                      >
+                        {search.category}
+                      </Link>
+                    </p>
+                    <p>
+                      {" "}
+                      <Link
+                        href={`/author/${generateLowerCase(search.author)}`}
+                        className="text-xs font-semibold no-underline text-gray-700 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-400"
+                      >{`by ${search.author}`}</Link>
+                    </p>
+                    <p
+                      href={"#"}
+                      className="text-xs font-semibold no-underline text-gray-700 dark:text-gray-300 mt-1"
                     >
-                      {search.category}
-                    </Link>
-                  </p>
-                  <p>
-                    {" "}
-                    <Link
-                      href={`/author/${generateLowerCase(search.author)}`}
-                      className="text-xs font-semibold no-underline text-gray-700 dark:text-gray-100 hover:text-gray-500 dark:hover:text-gray-400"
-                    >{`by ${search.author}`}</Link>
-                  </p>
-                  <p
-                    href={"#"}
-                    className="text-xs font-semibold no-underline text-gray-700 dark:text-gray-100 mt-1"
-                  >
-                    {search.date}
-                  </p>
+                      {search.date}
+                    </p>
+                  </div>
+                  <div className="flex space-x-3 items-center">
+                    <p className="flex items-center space-x-2 text-xs font-semibold text-gray-700 no-underline dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-400">
+                      <FiClock />
+                      {search.readTime}
+                    </p>
+                    <p className="flex items-center space-x-2  text-xs font-semibold text-gray-700 no-underline dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-400">
+                      <FiMessageSquare />
+                      {search.comment.length === 0
+                        ? "No comments"
+                        : `${search.comment.length} comments`}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -69,7 +88,12 @@ const TopRated = () => {
         </div>
         <div className="flex space-x-4">
           {searchTags.map((tags, index) => (
-            <Button variant={"ghost"} size={"tags"} key={index} className={"dark:hover:border-none"}> 
+            <Button
+              variant={"ghost"}
+              size={"tags"}
+              key={index}
+              className={"dark:hover:border-none"}
+            >
               {tags}
             </Button>
           ))}
