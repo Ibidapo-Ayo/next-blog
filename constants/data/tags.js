@@ -1,0 +1,1 @@
+export const searchTags = ["Women", "uganda", "Technology", "Tech", "Stories", "STEM", "Startups", "Startup", "South Africa", "Social Media"]
