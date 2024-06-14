@@ -4,14 +4,18 @@ import React, { useContext } from "react";
 import { FiMenu, FiSearch } from "react-icons/fi";
 import ModeToggler from "../../../theme/Toggler";
 import NavMenu from "../components/NavMenu";
-import Search from "../components/search/Search";
+import dynamic from "next/dynamic";
+
+const Search = dynamic(() => import("../components/search/Search"));
 
 const Header = () => {
-  const { sideBarHandler } = useContext(globalContext);
-  const [openSideBar, setOpenSideBar] = sideBarHandler;
+  const { sideBarHandler, searchBarHandler } = useContext(globalContext);
+  const [__, setOpenSideBar] = sideBarHandler;
+  const [openSearch, setOpenSearch] = searchBarHandler;
+
   return (
     <div className="relative w-full">
-      <div className="w-full md:px-20 lg:px-40  grid grid-cols-[auto,1fr,auto] md:grid-cols-[auto,auto,1fr,auto] items-center justify-between border-b border-b-gray-200 ">
+      <div className="w-full px-10 lg:px-40  grid grid-cols-[auto,1fr,auto] md:grid-cols-[auto,auto,1fr,auto] items-center justify-between border-b border-b-gray-200 ">
         <div className="w-[50px] flex items-center space-x-3 md:space-x-8">
           <FiMenu
             className="text-2xl cursor-pointer dark:text-white"
@@ -30,11 +34,14 @@ const Header = () => {
         </div>
         <div className="w-[100px] flex justify-end items-center space-x-2 md:space-x-5">
           <ModeToggler />
-          <FiSearch className="cursor-pointer dark:text-white" />
+          <FiSearch
+            className="cursor-pointer dark:text-white"
+            onClick={() => setOpenSearch((prev) => !prev)}
+          />
         </div>
       </div>
 
-      <Search />
+      {openSearch && <Search />}
     </div>
   );
 };

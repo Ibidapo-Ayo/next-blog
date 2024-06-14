@@ -9,7 +9,7 @@ import React from "react";
 
 const TopRated = () => {
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 hidden md:block">
       <div className="-space-y-3">
         <p className="text-gray-400 font-medium text-xs tracking-tight">Hand-Picked</p>
         <h4 className="text-gray-700 dark:text-gray-100 text-[22px]">Top-Read Stories</h4>
