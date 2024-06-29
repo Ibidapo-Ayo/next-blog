@@ -25,7 +25,7 @@ const TopRated = () => {
             <div className="grid grid-cols-[auto,1fr] gap-2" key={index}>
               <Image
                 src={search.image}
-                className="w-[100px]"
+                className="w-[90px]"
                 alt="Images not found"
               />
               <div className="space-y-3">
@@ -37,20 +37,18 @@ const TopRated = () => {
                 </Link>
                 <div className="-space-y-4">
                   <div className="flex items-center space-x-3 w-52">
-                    <p>
-                      {" "}
+                    <p className="text-xs">
                       <Link
                         href={`/category/${generateLowerCase(search.category)}`}
-                        className="text-xs font-semibold text-gray-700 no-underline dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-400"
+                        className="font-semibold text-gray-700 no-underline dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-400"
                       >
                         {search.category}
                       </Link>
                     </p>
-                    <p>
-                      {" "}
+                    <p className="text-xs">
                       <Link
                         href={`/author/${generateLowerCase(search.author)}`}
-                        className="text-xs font-semibold no-underline text-gray-700 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-400"
+                        className="font-semibold no-underline text-gray-700 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-400"
                       >{`by ${search.author}`}</Link>
                     </p>
                     <p
@@ -61,15 +59,17 @@ const TopRated = () => {
                     </p>
                   </div>
                   <div className="flex space-x-3 items-center">
-                    <p className="flex items-center space-x-2 text-xs font-semibold text-gray-700 no-underline dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-400">
+                    <p className="flex items-center space-x-2 text-xs font-semibold text-gray-700 no-underline dark:text-gray-300 ">
                       <FiClock />
-                      {search.readTime}
+                      <span> {search.readTime}</span>
                     </p>
-                    <p className="flex items-center space-x-2  text-xs font-semibold text-gray-700 no-underline dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-400">
+                    <p className="flex items-center space-x-2  text-xs font-semibold text-gray-700 no-underline dark:text-gray-300 ">
                       <FiMessageSquare />
-                      {search.comment.length === 0
-                        ? "No comments"
-                        : `${search.comment.length} comments`}
+                      <span>
+                        {search.comment.length === 0
+                          ? "No comments"
+                          : `${search.comment.length} comments`}
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -92,7 +92,6 @@ const TopRated = () => {
               variant={"ghost"}
               size={"tags"}
               key={index}
-              className={"dark:hover:border-none"}
             >
               {tags}
             </Button>

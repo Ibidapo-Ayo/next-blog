@@ -11,7 +11,6 @@ export const buttonStyles = cva(["transition-colors"], {
         "hover:text-gray-100",
         "text-gray-700",
         "border",
-        "border-gray-100",
         "hover:border-none",
         "outline-none",
       ],
