@@ -1,6 +1,4 @@
-import images from "@/constants/images";
 import { calculateReadTime } from "@/lib/calculateReadTime";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FiClock, FiMessageSquare } from "react-icons/fi";
@@ -11,7 +9,6 @@ const NewsCard = ({
   author,
   date,
   comment,
-  readTime,
   content,
   postImage,
   id,
@@ -25,8 +22,8 @@ const NewsCard = ({
   };
 
   return (
-    <div className="w-[260px] flex flex-col space-y-4 h-auto" key={id}>
-      <Link href="#">
+    <div className="flex w-100 flex-col space-y-4 h-auto" key={id}>
+      <div className="flex">
         <div
           className="w-full relative group overflow-hidden justify-center items-center flex"
           onMouseEnter={handleHover}
@@ -35,12 +32,12 @@ const NewsCard = ({
           <img
             src={postImage}
             alt=""
-            className="block w-full h-52 transition-transform transform-gpu scale-100 group-hover:scale-110"
+            className="block w-full md:h-60 h-full transition-transform transform-gpu scale-100 group-hover:scale-110 shrink-0"
             style={{ transition: "transform 0.4s" }}
           />
           {isHovered && (
             <div
-              className={`absolute h-52 top-0 w-full bg-black/50 flex justify-end bg-opacity-0 transition-opacity`}
+              className={`absolute h-60 top-0 w-full bg-black/50 flex justify-end bg-opacity-0 transition-opacity`}
             ></div>
           )}
           <div
@@ -48,12 +45,16 @@ const NewsCard = ({
               isHovered ? "-translate-y-0" : "translate-y-16"
             }`}
           >
-            <p className="text-xs font-semibold flex space-x-1 items-center"><FiClock />  <span>{calculateReadTime(content)}mins</span></p>
-            <p className="text-xs font-semibold flex space-x-1 items-center">  <FiMessageSquare />  <span>{comment}</span></p>
-          
+            <p className="text-xs font-semibold flex space-x-1 items-center">
+              <FiClock /> <span>{calculateReadTime(content)}mins</span>
+            </p>
+            <p className="text-xs font-semibold flex space-x-1 items-center">
+              {" "}
+              <FiMessageSquare /> <span>{comment}</span>
+            </p>
           </div>
         </div>
-      </Link>
+      </div>
 
       <p className="text-xs text-blue-600 tracking-tight font-semibold uppercase">
         {category}
@@ -70,22 +71,21 @@ const NewsCard = ({
       />
 
       <div className="flex space-x-3">
-        <div className="w-10 h-10 rounded-full">
-          <Image
-            src={images.post2}
+        <div className="w-10 h-10 rounded-full flex justify-center items-center shrink-0">
+          <img
+            src={author[0].attributes.image.big}
             alt=""
-            className="w-full h-full object-cover rounded-full"
+            className="w-10 h-10 rounded-full"
           />
         </div>
-        <div>
-          <Link
-            href={"#"}
-            className="truncate text-[14px] font-medium tracking-tight text-gray-900 dark:text-gray-50 hover:text-gray-600 dark:hover:text-gray-600 no-underline transition-colors duration-200"
-          >
-            Ibidapo Ayomide
+        <div className="shrink-0">
+          <Link href={"#"}>
+            <p className="truncate text-[14px] font-medium tracking-tight text-gray-900 dark:text-gray-50 hover:text-gray-600 dark:hover:text-gray-600 no-underline transition-colors duration-200">
+              {author[0].attributes.nick}
+            </p>
           </Link>
           <p className="truncate text-[12px] tracking-wide text-gray-400 dark:text-gray-50">
-            {date}
+            {date()}
           </p>
         </div>
       </div>
