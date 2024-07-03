@@ -1,40 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import ReactPaginate from "react-paginate";
 
-const Pagination = ({ posts, paginate, currentPage, itemsPerPage }) => {
+const Pagination = ({ totalPages, handlePageClick }) => {
   return (
-    <div className="flex justify-center mt-4">
-      <button
-        className="px-4 py-2 mx-1 bg-gray-200"
-        onClick={() => paginate(currentPage - 1)}
-        disabled={currentPage === 1}
-      >
-        Previous
-      </button>
-
-      {Array.from({ length: Math.ceil(posts.data.length / itemsPerPage) }).map(
-        (_, index) => (
-          <button
-            key={index}
-            className={`px-4 py-2 mx-1 ${
-              currentPage === index + 1
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200"
-            }`}
-            onClick={() => paginate(index + 1)}
-          >
-            {index + 1}
-          </button>
-        )
-      )}
-
-      <button
-        className="px-4 py-2 mx-1 bg-gray-200"
-        onClick={() => paginate(currentPage + 1)}
-        disabled={currentPage === Math.ceil(posts.data.length / itemsPerPage)}
-      >
-        Next
-      </button>
-    </div>
+    <ReactPaginate
+      breakLabel={
+        <span className="text-gray-900 dark:text-gray-50">...</span>
+      }
+      nextLabel={
+        <span className="w-8 h-8 flex items-center justify-center rounded-md bg-blue-600">
+          <FiChevronRight className="text-gray-50" />
+        </span>
+      }
+      onPageChange={handlePageClick}
+      pageRangeDisplayed={3}
+      pageCount={totalPages}
+      previousLabel={
+        <span className="w-8 h-8 flex items-center justify-center rounded-md bg-blue-600 mr-4">
+          <FiChevronLeft className="text-gray-50" />
+        </span>
+      }
+      renderOnZeroPageCount={null}
+      containerClassName="flex items-center justify-around mt-8 mb-4"
+      pageClassName="block border- border-solid w-8 h-8 border-blue-300 hover:bg-blue-600 text-gray-900 hover:text-gray-50  flex items-center justify-center rounded-md mr-4 dark:text-gray-50"
+      activeClassName="bg-blue-600 text-white"
+      initialPage={1}
+    />
   );
 };
 
