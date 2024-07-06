@@ -12,6 +12,7 @@ const Header = () => {
   const { sideBarHandler, searchBarHandler } = useContext(globalContext);
   const [__, setOpenSideBar] = sideBarHandler;
   const [openSearch, setOpenSearch] = searchBarHandler;
+  
 
   return (
     <div className="relative w-full">
@@ -22,10 +23,15 @@ const Header = () => {
             onClick={() => setOpenSideBar(true)}
           />
         </div>
-        <div className="w-full md:w-[100px] flex justify-center items-center">
-          <img
-            src="/next.svg"
-            className="w-20 h-20 md:w-28 md:h-28"
+        <div className="w-full md:w-[120px] flex justify-center items-center">
+        <img
+            src="/logo1.svg"
+            className="w-20 h-20 md:w-28 md:h-28 dark:block hidden"
+            alt="Blog Logo"
+          />
+           <img
+            src="/logo2.svg"
+            className="w-20 h-20 md:w-28 md:h-28 dark:hidden block"
             alt="Blog Logo"
           />
         </div>

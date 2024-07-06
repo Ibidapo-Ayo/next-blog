@@ -10,20 +10,10 @@ const API_URL = axios.create({
 
 export default API_URL;
 
-export const getAllPosts = () => {
-  var url = `news/v2/list`;
-  const headers = {
-    "x-rapidapi-key": "89a545c432msh66c883678a71bf2p12beddjsn6b1659ffcf26",
-    "x-rapidapi-host": "seeking-alpha.p.rapidapi.com",
-  };
+export const getSearchPosts = (query) => {
+  var url = ` everything?q=${query}&apiKey=f1f84bbd0eee4a0488bd18fa69967a45`;
   return API_URL({
     method: "GET",
-    headers: headers,
     url: url,
-    params: {
-      size: "40",
-      category: "market-news::all",
-      number: "1",
-    },
   });
 };

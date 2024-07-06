@@ -7,7 +7,7 @@ import MainSideBar from "./components/MainSideBar";
 import { generateLink } from "@/lib/helper";
 
 const MainPage = ({ posts }) => {
-  const itemsPerPage = 9;
+  const itemsPerPage = 8;
   const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -18,48 +18,46 @@ const MainPage = ({ posts }) => {
   };
 
   return (
-    <div className="grid xl:grid-cols-[1fr,auto] grid-cols-1 mt-7 gap-3 px-10 md:px-20 lg:px-40">
+    <div className="grid xl:grid-cols-[1fr,auto] grid-cols-1 mt-7 gap-3 px-10 lg:px-20 xl:px-40">
       <div className="w-full">
         <div className="w-full grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
-          {posts?.data
+          {posts?.articles
             .slice(indexOfFirstItem, indexOfLastItem)
             .map((post, index) => {
               const {
                 title,
-                gettyImageUrl,
+                description,
+                publishedAt,
+                urlToImage,
+                author,
                 content,
-                publishOn,
-                commentCount,
-              } = post.attributes;
+                url
+              } = post;
 
-              const { author } = post.relationships;
-
-              const authorData = posts.included.filter(
-                (aut) => aut.id === author.data.id
-              );
               return (
                 <NewsCard
                   title={title}
-                  category={post.type}
-                  date={() => formateDate(publishOn)}
-                  comment={commentCount}
-                  id={post.id}
+                  category={"News"}
+                  date={() => formateDate(publishedAt)}
+                  id={title}
                   content={content}
-                  postImage={gettyImageUrl}
-                  author={authorData}
-                  key={post.id}
+                  description={description}
+                  postImage={urlToImage}
+                  author={author}
+                  key={title}
                   link={generateLink(title)}
+                  url={url}
                 />
               );
             })}
         </div>
         <Pagination
-          totalPages={Math.ceil(posts?.data?.length / itemsPerPage)}
+          totalPages={Math.ceil(posts?.articles.length / itemsPerPage)}
           handlePageClick={handlePageClick}
         />
       </div>
       <div className="lg:w-[300px] md:w-[150px] sm:w-100">
-        <MainSideBar latestPosts={posts?.data.slice(0, 3)} />
+        <MainSideBar latestPosts={posts?.articles.slice(0, 3)} />
       </div>
     </div>
   );
