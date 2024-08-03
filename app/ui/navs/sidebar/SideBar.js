@@ -5,6 +5,7 @@ import React, { useContext } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { FiInstagram, FiLinkedin } from "react-icons/fi";
 import NavMenu from "../components/NavMenu";
+import Link from "next/link"
 
 const SideBar = () => {
   const { sideBarHandler } = useContext(globalContext);
@@ -26,12 +27,8 @@ const SideBar = () => {
        </div>
         <div className="">
           <div className="flex space-x-3 items-center">
-            <FiInstagram className="text-gray-600 text-md" />
-            <p className="text-black mt-3"> Instagram</p>
-          </div>
-          <div className="flex space-x-3 items-center">
             <FiLinkedin className="text-blue-600 text-md" />
-            <p className="text-black mt-3 text-md"> Linkedin</p>
+            <Link href="https://www.linkedin.com/in/ayomide-ibidapo-1912541b4" target="_blank" className="text-black mt-3 text-md"> Linkedin</Link>
           </div>
         </div>
       </Offcanvas.Body>
